@@ -5,48 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import com.example.navigation.PhoneListItem;
 import com.example.navigation.R;
-import com.example.navigation.PhoneListAdapter;
+import com.example.navigation.RestaurantAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class HomeFragment extends ListFragment {
+public class HomeFragment extends Fragment {
     private HomeViewModel viewModel;
-    private PhoneListAdapter adapter;
+    private RestaurantAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // RecyclerView 설정
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Adapter 적용
-        viewModel = new HomeViewModel(getContext()); // Json 파일을 읽기 위해
-        adapter = new PhoneListAdapter(getContext(), viewModel.getPhoneList()); // Json 읽어서 Adapter로 넘김
-        setListAdapter(adapter); // Adapter 설정
-        View view = super.onCreateView(inflater, container, savedInstanceState); // View
+        viewModel = new HomeViewModel(getContext());
+        adapter = new RestaurantAdapter(getContext(), viewModel.getRestaurantList());
+        recyclerView.setAdapter(adapter);
 
-        // List의 각 Item Click 처리
+        // Item 클릭 리스너 설정 (예시)
+        // recyclerView.setOnItemClickListener(...);
 
         return view;
-
-        /*
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        adapter = new PhoneListAdapter(getContext(), new ArrayList<>());
-
-        ListView listView = view.findViewById(R.id.listview_phone);
-        listView.setAdapter(adapter);
-        viewModel.getPhoneList().observe(getViewLifecycleOwner(), newList -> {
-            adapter.updateData(newList);
-        });
-        return view;
-        */
     }
 }
