@@ -14,7 +14,10 @@
         android:theme="@style/Theme.Navigation"
         tools:targetApi="31">
 
-        <!-- SplashActivity를 시작 액티비티로 설정 -->
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="tdk7ibx1j9" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
