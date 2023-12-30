@@ -16,19 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@tools:sample/avatars" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="20">
+            android:layout_weight="10">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="Search" />
