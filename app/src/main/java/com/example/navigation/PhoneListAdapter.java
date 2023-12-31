@@ -13,11 +13,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneListAdapter extends BaseAdapter implements Filterable {
+public class PhoneListAdapter extends BaseAdapter {
     private ArrayList<PhoneListItem> list;
     private final Context context;
 
-    Filter listFilter;
+
+    //Filter listFilter;
 
     public PhoneListAdapter(Context context, ArrayList<PhoneListItem> list){
         this.list = list;
@@ -57,46 +58,5 @@ public class PhoneListAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
-    @Override
-    public Filter getFilter(){
-        if(listFilter == null){
-            listFilter = new ListFilter();
-        }
-        return listFilter;
-    }
 
-    private class ListFilter extends Filter{
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint){
-            FilterResults results = new FilterResults();
-
-            if(constraint == null || constraint.length() == 0){
-                results.values = list;
-                results.count = list.size();
-            } else{
-                // 만약 text가 입력된다면..
-                ArrayList<PhoneListItem> filtered = new ArrayList<PhoneListItem>();
-
-                for(PhoneListItem item : list){
-                    if(item.getName().toLowerCase().contains(constraint.toString().toLowerCase())){ // 검색조건
-                        filtered.add(item);
-                    }
-                }
-                results.values = filtered;
-                results.count = filtered.size();
-            }
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results){
-            ArrayList<PhoneListItem> filtered = (ArrayList<PhoneListItem>) results.values;
-
-            if(results.count > 0){
-                notifyDataSetChanged();
-            } else{
-                notifyDataSetInvalidated();
-            }
-        }
-    }
 }
