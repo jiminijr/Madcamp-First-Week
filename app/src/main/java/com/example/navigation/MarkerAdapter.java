@@ -51,19 +51,6 @@ public class MarkerAdapter extends InfoWindow.DefaultViewAdapter{
         info.setText(mitem.getInfo());
         link.setText(mitem.getLink());
 
-        // Link 연결
-        if(!mitem.getLink().equals("None")) {
-
-            Linkify.TransformFilter transformFilter = new Linkify.TransformFilter() {
-                @Override
-                public String transformUrl(Matcher match, String url) {
-                    return "";
-                }
-            };
-            Pattern pattern = Pattern.compile(mitem.getLink());
-            Linkify.addLinks(link, pattern, "https://" + mitem.getLink(), null, transformFilter);
-        }
-
         return view;
     }
 }

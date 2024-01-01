@@ -1,9 +1,11 @@
 package com.example.navigation.ui.notifications;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.icu.text.IDNA;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -174,6 +176,11 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
             infoWindow.setOnClickListener(new Overlay.OnClickListener(){
                 @Override
                 public boolean onClick(@NonNull Overlay overlay){
+                    if(!item.getLink().equals("None")) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse("https://" + item.getLink()));
+                        startActivity(intent);
+                    }
                     return true;
                 }
             });
