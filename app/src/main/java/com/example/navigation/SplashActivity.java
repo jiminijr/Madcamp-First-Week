@@ -19,6 +19,6 @@ public class SplashActivity extends Activity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 finish();
             }
-        }, 2000); // 2초간 스플래시 화면 표시
+        }, 5000); // 2초간 스플래시 화면 표시
     }
 }

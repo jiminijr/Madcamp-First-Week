@@ -1,7 +1,6 @@
 package com.example.navigation;
 
 import android.os.Bundle;
-import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

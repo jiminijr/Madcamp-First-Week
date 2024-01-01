@@ -1,25 +1,14 @@
 package com.example.navigation;
 
 import android.content.Context;
-import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
-import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-
 import com.naver.maps.map.overlay.InfoWindow;
 
-import org.w3c.dom.Text;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MarkerAdapter extends InfoWindow.DefaultViewAdapter{
 

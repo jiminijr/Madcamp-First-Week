@@ -3,19 +3,15 @@ package com.example.navigation.ui.notifications;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PointF;
-import android.icu.text.IDNA;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.fragment.app.FragmentManager;
-
 import com.example.navigation.MarkerAdapter;
 import com.example.navigation.MarkerItem;
 import com.example.navigation.R;
@@ -28,15 +24,11 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
-import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
-import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
-import com.naver.maps.map.widget.CompassView;
 import com.naver.maps.map.widget.ScaleBarView;
-import com.naver.maps.map.widget.ZoomControlView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
