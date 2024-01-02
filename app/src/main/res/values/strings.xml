@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Kaimat</string>
+    <string name="app_name">카이맛</string>
     <string name="title_home">Restaurants</string>
     <string name="title_dashboard">Tags</string>
     <string name="title_notifications">Map</string>
