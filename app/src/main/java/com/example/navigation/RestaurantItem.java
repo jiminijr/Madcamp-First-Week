@@ -18,10 +18,15 @@ public class RestaurantItem implements Serializable {
 
     private List<Menu> menuList;
 
+    private double lat;
+    private double lon;
+    private String link;
+
     private boolean isExpanded;
 
     // Updated constructor to include new fields
-    public RestaurantItem(int outImgResId, int foodImgResId, String name, String address, String number, String info, String tag, List<Menu> menuList){
+    public RestaurantItem(int outImgResId, int foodImgResId, String name, String address, String number,
+                          String info, String tag, List<Menu> menuList, double lat, double lon, String link){
         this.outImg = outImgResId;
         this.foodImg = foodImgResId;
         this.name = name;
@@ -31,6 +36,9 @@ public class RestaurantItem implements Serializable {
         this.tag = tag;
         this.isExpanded = false;
         this.menuList = menuList;
+        this.lat = lat;
+        this.lon = lon;
+        this.link = link;
     }
 
     // isExpanded의 getter와 setter
@@ -74,4 +82,9 @@ public class RestaurantItem implements Serializable {
     public List<Menu> getMenuList() {
         return menuList;
     }
+    public double getLat() {return lat;}
+    public double getLon() {return lon;}
+    public String getLink(){return link;}
+
+
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.navigation.R;
 import com.example.navigation.RestaurantAdapter;
 import com.example.navigation.RestaurantItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,26 @@ public class HomeFragment extends Fragment {
         });
 
 
+        // Floating Button 처리
+        FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.search_tab);
+        SearchFragment searchFragment = new SearchFragment(adapter);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            private boolean open = false;
+            @Override
+            public void onClick(View v) {
+                open = !open;
+                if(open) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.search_tab_container, searchFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else{
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
+            }
+        });
         return view;
     }
 

@@ -35,6 +35,9 @@ public class JsonParser {
                 String number = jsonObject.getString("number");
                 String info = jsonObject.getString("info");
                 String tag = jsonObject.getString("tag");
+                double lat = Double.parseDouble(jsonObject.getString("lat"));
+                double lon = Double.parseDouble(jsonObject.getString("lon"));
+                String link = jsonObject.getString("link");
 
                 JSONArray menuArray = jsonObject.getJSONArray("menu");
                 List<Menu> menuList = new ArrayList<>();
@@ -46,8 +49,7 @@ public class JsonParser {
                     String menuPrice = menuObject.getString("menu_price");
                     menuList.add(new Menu(menuName, menuImgResId, menuPrice));
                 }
-
-                restaurantList.add(new RestaurantItem(outImgResId, foodImgResId, name, address, number, info, tag, menuList));
+                restaurantList.add(new RestaurantItem(outImgResId, foodImgResId, name, address, number, info, tag, menuList, lat, lon, link));
             }
         } catch (Exception e) {
             e.printStackTrace();

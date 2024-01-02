@@ -63,7 +63,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.naver.maps:map-sdk:3.17.0")
-    
+
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -80,7 +80,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("com.google.android.gms:play-services-location:21.0.1")
-
 
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation ("org.xerial:sqlite-jdbc:3.34.0")
