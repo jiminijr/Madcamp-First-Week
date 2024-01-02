@@ -26,10 +26,25 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private Fragment currentFragment;
     private List<RestaurantItem> restaurantList;
 
+    private List<RestaurantItem> unique_tag_restaurantList;
+
     public GalleryAdapter(Context context, List<RestaurantItem> restaurantList, Fragment currentFragment) {
         this.context = context;
         this.restaurantList = restaurantList;
         this.currentFragment = currentFragment;
+        this.Delete_Duplicate();
+    }
+
+    private void Delete_Duplicate(){
+        unique_tag_restaurantList = new ArrayList<>();
+        List<String> tags = new ArrayList<>();
+        for(RestaurantItem item : restaurantList){
+            String tag = item.getTag();
+            if(!tags.contains(tag)){
+                unique_tag_restaurantList.add(item);
+                tags.add(tag);
+            }
+        }
     }
 
     @NonNull
@@ -41,7 +56,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        RestaurantItem restaurantItem = restaurantList.get(position);
+        RestaurantItem restaurantItem = unique_tag_restaurantList.get(position);
         int foodImgResId = context.getResources().getIdentifier("food" + (position + 1), "drawable", context.getPackageName());
         holder.imageView.setImageResource(foodImgResId);
         holder.tagTextView.setText(restaurantItem.getTag()); // 태그 설정
@@ -49,7 +64,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return restaurantList.size();
+        return unique_tag_restaurantList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
