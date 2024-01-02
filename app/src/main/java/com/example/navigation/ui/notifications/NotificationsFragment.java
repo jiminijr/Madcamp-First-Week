@@ -27,6 +27,7 @@ import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.InfoWindow;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 import com.naver.maps.map.widget.ScaleBarView;
@@ -107,8 +108,8 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
             marker.setHideCollidedMarkers(true);
 
             // Marker Design
-            marker.setIcon(MarkerIcons.BLACK);
-            marker.setIconTintColor(Color.RED);
+            marker.setIcon(OverlayImage.fromResource(R.drawable.ic_smile));
+            marker.setIconTintColor(Color.BLUE);
             marker.setWidth(Marker.SIZE_AUTO);
             marker.setHeight(Marker.SIZE_AUTO);
 
