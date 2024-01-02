@@ -135,7 +135,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         imageView.setImageResource(menu.getMenuImgResId());
         textView.setText(menu.getMenuName());
-        textPriceView.setText(menu.getMenuPrice());
+        textPriceView.setText(menu.getMenuPrice() + "원");
     }
 
     @Override
