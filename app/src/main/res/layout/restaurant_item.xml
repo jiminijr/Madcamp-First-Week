@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/restaurant_image_view"
@@ -11,6 +11,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@+id/restaurant_info_view"
@@ -28,6 +29,7 @@
         android:textSize="18sp"
         android:lineSpacingExtra="15dp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/restaurant_image_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -63,11 +65,18 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
+        android:paddingBottom="25dp"
         app:layout_constraintStart_toEndOf="@+id/restaurant_image_view"
         app:layout_constraintTop_toBottomOf="@+id/restaurant_address_view"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_info_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <FrameLayout
         android:id="@+id/details_container"
@@ -75,7 +84,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/restaurant_info_view"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent">
     </FrameLayout>

@@ -1,9 +1,10 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="10dp">
 
     <!-- 첫 번째 FrameLayout -->
     <FrameLayout
@@ -129,5 +130,40 @@
             android:fontWeight="1000"
             android:layout_margin="8dp" />
     </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/icon_phone_call"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_phone_call"
+        app:layout_constraintEnd_toEndOf="@id/frame2"
+        app:layout_constraintStart_toStartOf="@id/frame1"
+        app:layout_constraintTop_toBottomOf="@id/frame1"
+        app:layout_constraintWidth_percent="0.01" />
+
+
+    <ImageView
+        android:id="@+id/icon_map"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_map_black_24dp"
+        app:layout_constraintEnd_toEndOf="@id/frame3"
+        app:layout_constraintStart_toStartOf="@id/frame2"
+        app:layout_constraintTop_toBottomOf="@id/frame2"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:padding="20dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintTop_toBottomOf="@+id/icon_map"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
