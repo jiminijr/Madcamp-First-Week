@@ -1,5 +1,6 @@
 package com.example.navigation.ui.notifications;
 
+import com.example.navigation.util.JsonParser;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PointF;
@@ -15,6 +16,7 @@ import androidx.fragment.app.FragmentContainerView;
 import com.example.navigation.MarkerAdapter;
 import com.example.navigation.MarkerItem;
 import com.example.navigation.R;
+import com.example.navigation.RestaurantItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
@@ -30,13 +32,8 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 import com.naver.maps.map.widget.ScaleBarView;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.List;
 
 public class NotificationsFragment extends Fragment implements OnMapReadyCallback{
 
@@ -47,43 +44,6 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
     private View rootView;
     public NotificationsFragment(){}
 
-
-    // Json으로 부터 위도, 경도 읽어오기 - 이 부분만 merge 후에 수정하면 될듯
-    public ArrayList<MarkerItem> getMarkerInfo(){
-        ArrayList<MarkerItem> ret = new ArrayList<>();
-        try {
-            InputStream is = getContext().getAssets().open("res.json"); // Merge 후에 파일명 restaurant.json으로 변경
-            int size = is.available();
-            byte[] buffer = new byte[size];
-
-            is.read(buffer);
-            is.close();
-
-            ArrayList<MarkerItem> pos_list = new ArrayList<>();
-            String json = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray jsonArray = new JSONObject(json).getJSONArray("restaurant");
-
-            for(int i=0; i < jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                double lat = Double.parseDouble(jsonObject.getString("lat"));
-                double lon = Double.parseDouble(jsonObject.getString("lon"));
-                String name = jsonObject.getString("name");
-                String phone = jsonObject.getString("number");
-                String address = jsonObject.getString("address");
-                String info = jsonObject.getString("info");
-                String foodimg = jsonObject.getString("food_img");
-                int foodimg_id = getContext().getResources().getIdentifier(foodimg, "drawable", getContext().getPackageName());
-                String link = jsonObject.getString("link");
-
-                pos_list.add(new MarkerItem(lat, lon, name, phone, address, info, foodimg_id, link));
-            }
-            return pos_list;
-
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        return ret;
-    }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -137,11 +97,12 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
         // Marker & Infowindow
-        ArrayList<MarkerItem> marker_pos_list = getMarkerInfo();
-        ArrayList<InfoWindow> infoWindows = new ArrayList<>();
-        ArrayList<Marker> markers = new ArrayList<>();
 
-        for(MarkerItem item : marker_pos_list){
+        List<RestaurantItem> res_list = JsonParser.parseRestaurantsJson(getContext(), "restaurants.json");
+        List<InfoWindow> infoWindows = new ArrayList<>();
+        List<Marker> markers = new ArrayList<>();
+
+        for(RestaurantItem item : res_list){
             // Marker Position
             Marker marker = new Marker();
             LatLng position = new LatLng(item.getLat(), item.getLon());
@@ -179,7 +140,6 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
 
             infoWindow.setAdapter(new MarkerAdapter(requireContext(), rootView, item));
             infoWindows.add(infoWindow);
-
         }
 
         // Marker Click Event 처리

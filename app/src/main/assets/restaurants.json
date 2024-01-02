@@ -299,6 +299,21 @@
       "lat":"36.36164435",
       "lon":"127.35096899",
       "link": "None"
+    },
+    {
+      "out_img": "out21",
+      "food_img": "food21",
+      "menu": [{"menu_name":"무화과타르트", "menu_img":"menu_21_1", "menu_price":"8400"},
+        {"menu_name":"유자타르트", "menu_img":"menu_21_2", "menu_price":"8200"},
+        {"menu_name":"까눌레", "menu_img":"menu_21_3", "menu_price":"2800"}],
+      "name": "카페소신",
+      "address": "궁동 429-5",
+      "number": "010-8558-9746",
+      "info": "궁동 디저트 카페",
+      "tag": "디저트",
+      "lat":"36.3616087",
+      "lon":"127.3526801",
+      "link": "https://www.instagram.com/patisserie_sosin/"
     }
   ]
 }

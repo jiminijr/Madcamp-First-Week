@@ -5,17 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
-public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> {
+public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> implements Filterable {
 
     private final Context context;
     private final ArrayList<RestaurantItem> restaurantList;
-
+    private ArrayList<RestaurantItem> filtered_restaurantList;
     // 클릭 이벤트 리스너 인터페이스
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -26,6 +28,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList) {
         this.context = context;
         this.restaurantList = restaurantList;
+        this.filtered_restaurantList = restaurantList;
     }
 
     @Override
@@ -36,7 +39,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     @Override
     public void onBindViewHolder(RestaurantAdapter.ViewHolder holder, int position) {
-        RestaurantItem item = restaurantList.get(position);
+        RestaurantItem item = filtered_restaurantList.get(position);
 
         holder.imageView.setImageResource(item.getOutImg());
         holder.nameTextView.setText(item.getName());
@@ -96,10 +99,40 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         textPriceView.setText(menu.getMenuPrice());
     }
 
+    @Override
+    public Filter getFilter(){
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String query = constraint.toString();
+                if(query.isEmpty()){
+                    filtered_restaurantList = restaurantList;
+                }
+                else{
+                     ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
+                     for(RestaurantItem item : restaurantList){
+                         if(item.getName().contains(query)){
+                             tmp_filtered_restaurantList.add(item);
+                         }
+                     }
+                     filtered_restaurantList = tmp_filtered_restaurantList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filtered_restaurantList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                    filtered_restaurantList = (ArrayList<RestaurantItem>) results.values;
+                    notifyDataSetChanged();
+            }
+        };
+    }
 
     @Override
     public int getItemCount() {
-        return restaurantList.size();
+        return filtered_restaurantList.size();
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

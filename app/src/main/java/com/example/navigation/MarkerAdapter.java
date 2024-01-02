@@ -14,8 +14,8 @@ public class MarkerAdapter extends InfoWindow.DefaultViewAdapter{
 
     private final Context mcontext;
     private final ViewGroup mparent;
-    private final MarkerItem mitem;
-    public MarkerAdapter(@NonNull Context context, ViewGroup parent, MarkerItem item){
+    private final RestaurantItem mitem;
+    public MarkerAdapter(@NonNull Context context, ViewGroup parent, RestaurantItem item){
         super(context);
         mcontext = context;
         mparent = parent;
@@ -33,7 +33,7 @@ public class MarkerAdapter extends InfoWindow.DefaultViewAdapter{
         TextView info = (TextView) view.findViewById(R.id.marker_info_text);
         TextView link = (TextView) view.findViewById(R.id.marker_link_text);
 
-        main_image.setImageResource(mitem.getFoodimg());
+        main_image.setImageResource(mitem.getFoodImg());
         title.setText(mitem.getName());
         phone.setText(mitem.getNumber());
         address.setText(mitem.getAddress());
