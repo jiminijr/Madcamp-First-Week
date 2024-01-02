@@ -10,8 +10,16 @@
         android:id="@+id/search_tab_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding ="10dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_search_black_24dp" />
 
     </LinearLayout>
 
@@ -19,6 +27,8 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_tab_container" />
 
@@ -28,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="228dp"
+        android:layout_marginBottom="100dp"
         android:clickable="true"
         android:src="@drawable/ic_search_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"

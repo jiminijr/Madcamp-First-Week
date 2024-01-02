@@ -10,4 +10,15 @@
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
 
+    <TextView
+        android:id="@+id/text_view_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|start"
+        android:background="#66000000"
+        android:textStyle="bold"
+        android:fontFamily="@font/nanum_square_bold"
+        android:padding="5dp"
+        android:textColor="@color/white" />
+
 </FrameLayout>

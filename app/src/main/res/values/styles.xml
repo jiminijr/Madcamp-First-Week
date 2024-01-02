@@ -1,5 +1,6 @@
 <resources>
     <style name="RoundedImageView">
-        <item name="cornerSize">50%</item>
-    </style>
+        <item name="cornerSize">50%</item>     </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">     </style>
 </resources>
