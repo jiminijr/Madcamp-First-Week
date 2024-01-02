@@ -172,7 +172,6 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
                 }
             }
         });
-         
 
         // Current Location Button Click Event 처리
         cur_loc_button.setOnClickListener(new View.OnClickListener(){
