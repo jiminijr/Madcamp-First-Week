@@ -2,21 +2,25 @@ package com.example.navigation.ui.home;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.navigation.R;
 import com.example.navigation.RestaurantAdapter;
 import com.example.navigation.RestaurantItem;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,31 +55,27 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // 입력 처리 + claer 버튼 조절
-        TextView search = (TextView) view.findViewById(R.id.search_text);
-        ImageButton clear = (ImageButton) view.findViewById(R.id.search_text_clear);
-        clear.setOnClickListener(new View.OnClickListener() {
+
+        // Floating Button 처리
+        FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.search_tab);
+        SearchFragment searchFragment = new SearchFragment(adapter);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            private boolean open = false;
             @Override
             public void onClick(View v) {
-                search.setText(null);
+                open = !open;
+                if(open) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .add(R.id.search_tab_container, searchFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+                else{
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
             }
         });
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(s);
-                clear.setVisibility(s.toString().length() > 0? View.VISIBLE:View.GONE);
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         return view;
     }
 

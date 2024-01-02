@@ -111,7 +111,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 else{
                      ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
                      for(RestaurantItem item : restaurantList){
-                         if(item.getName().contains(query)){
+                         if(item.getName().toLowerCase().contains(query.toLowerCase())){
                              tmp_filtered_restaurantList.add(item);
                          }
                      }

@@ -7,35 +7,11 @@
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/search_tab_container"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_text"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:hint="Search" />
-
-            <ImageButton
-                android:id="@+id/search_text_clear"
-                android:contentDescription=""
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="5dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_cross_black_24dp"
-                android:visibility="gone"/>
-        </FrameLayout>
 
     </LinearLayout>
 
@@ -44,10 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/search_tab_container" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/search_tab"
         android:contentDescription=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
