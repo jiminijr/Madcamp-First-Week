@@ -115,7 +115,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                     navController.popBackStack();
                     navController.navigate(R.id.navigation_notifications);
                 }
-                
             });
         }
     }
