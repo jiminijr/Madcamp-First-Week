@@ -22,29 +22,21 @@ public class DetailsRestaurantFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.details_restaurant, container, false);
-        Log.d("DetailsFragment", "onCreateView called for Details");
         if (getArguments() != null) {
-            Log.d("DetailsFragment", "Arguments found");
             restaurantItem = (RestaurantItem) getArguments().getSerializable("restaurant");
             if (restaurantItem != null) {
-                Log.d("DetailsFragment", "Restaurant item is not null");
                 updateDetailsView(view);
             } else {
-                Log.d("DetailsFragment", "Restaurant item is null");
             }
         } else {
-            Log.d("DetailsFragment", "No arguments found");
         }
 
         return view;
     }
 
     private void updateDetailsView(View view) {
-        Log.d("DetailsFragment", "****************Updating details view");
 
         if (!restaurantItem.getMenuList().isEmpty()) {
-            Log.d("DetailsFragment", "**************Menu list size: " + restaurantItem.getMenuList().size());
-            // 첫 번째 메뉴 아이템 업데이트
             updateMenuLayout(view, restaurantItem.getMenuList().get(0), R.id.frame1, R.id.image1, R.id.text1, R.id.text1_1);
 
             // 두 번째 메뉴 아이템 (있는 경우)

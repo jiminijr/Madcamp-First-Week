@@ -1,6 +1,8 @@
 package com.example.navigation;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +85,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 }
             }
         }
+        ImageView phoneCallIcon = detailsView.findViewById(R.id.icon_phone_call); // details_restaurant 레이아웃에서 아이콘 찾기
+        if (phoneCallIcon != null) {
+            phoneCallIcon.setOnClickListener(v -> {
+                // 전화 걸기 인텐트 실행
+                String phoneNumber = item.getNumber(); // 전화번호 가져오기
+                Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                callIntent.setData(Uri.parse("tel:" + phoneNumber));
+                detailsView.getContext().startActivity(callIntent);
+            });
+        }
     }
+
 
     private void updateMenuLayout(View detailsView, Menu menu, int frameId, int imageId, int textId, int textPriceId) {
         FrameLayout frameLayout = detailsView.findViewById(frameId);
@@ -113,6 +126,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView addressTextView;
         TextView infoTextView;
         ViewGroup detailsView; // 상세 정보 뷰 멤버 변수 선언
+        ImageView phoneCallIcon; // 전화 아이콘 추가
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -122,7 +136,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             addressTextView = itemView.findViewById(R.id.restaurant_address_view);
             infoTextView = itemView.findViewById(R.id.restaurant_info_view);
             detailsView = itemView.findViewById(R.id.details_container); // 상세 정보 뷰 초기화
-
         }
     }
 }
