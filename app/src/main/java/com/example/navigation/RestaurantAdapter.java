@@ -12,7 +12,14 @@ import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> implements Filterable {
@@ -98,6 +105,19 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 detailsView.getContext().startActivity(callIntent);
             });
         }
+
+        ImageView maplinkIcon = detailsView.findViewById(R.id.icon_map);
+        if(maplinkIcon != null) {
+            maplinkIcon.setOnClickListener(v ->{
+                // map에 연결 -> Navcontroller 가져와서 map 이동 -> Camera를 대응하는 것으로 설정 -> info window activate
+                NavController navController = Navigation.findNavController(detailsView);
+                if(navController != null) {
+                    navController.popBackStack();
+                    navController.navigate(R.id.navigation_notifications);
+                }
+                
+            });
+        }
     }
 
 
@@ -124,7 +144,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 else{
                      ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
                      for(RestaurantItem item : restaurantList){
-                         if(item.getName().toLowerCase().contains(query.toLowerCase())){
+                         if(item.getName().toLowerCase().contains(query.toLowerCase())
+                                 || item.getAddress().toLowerCase().contains(query.toLowerCase())){
                              tmp_filtered_restaurantList.add(item);
                          }
                      }
