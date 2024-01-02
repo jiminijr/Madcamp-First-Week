@@ -3,6 +3,7 @@ package com.example.navigation;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,9 +114,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         if(maplinkIcon != null) {
             maplinkIcon.setOnClickListener(v ->{
                 // map에 연결 -> Navcontroller 가져와서 map 이동 -> Camera를 대응하는 것으로 설정 -> info window activate
+                // item 전달
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("item", item);
+
                 NavController navController = NavHostFragment.findNavController(currentFragment);
                 navController.popBackStack();
-                navController.navigate(R.id.navigation_notifications);
+                navController.navigate(R.id.navigation_notifications, bundle);
+
             });
         }
     }

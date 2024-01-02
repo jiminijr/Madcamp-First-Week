@@ -41,6 +41,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
     private NaverMap naverMap;
     private FloatingActionButton cur_loc_button;
     private View rootView;
+
     public NotificationsFragment(){}
 
     @Override
@@ -58,7 +59,6 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
         }
         mapFragment.getMapAsync(this);
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
-
         cur_loc_button = rootView.findViewById(R.id.curloc);
         return rootView;
     }
@@ -92,9 +92,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
         naverMap.setMaxZoom(18.0);
         naverMap.setMinZoom(12.0);
 
-        // 현재 위치 tracking
-        naverMap.setLocationSource(locationSource);
-        naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+
         // Marker & Infowindow
 
         List<RestaurantItem> res_list = JsonParser.parseRestaurantsJson(getContext(), "restaurants.json");
@@ -107,6 +105,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
             LatLng position = new LatLng(item.getLat(), item.getLon());
             marker.setPosition(position);
             marker.setHideCollidedMarkers(true);
+
             // Marker Design
             marker.setIcon(MarkerIcons.BLACK);
             marker.setIconTintColor(Color.RED);
@@ -121,6 +120,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
             // Marker Adding
             marker.setMap(naverMap);
             markers.add(marker);
+
             // InfoWindow 설정
             InfoWindow infoWindow = new InfoWindow();
             ViewGroup rootView = (ViewGroup) getView().findViewById(R.id.map);
@@ -140,6 +140,33 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
             infoWindow.setAdapter(new MarkerAdapter(requireContext(), rootView, item));
             infoWindows.add(infoWindow);
         }
+
+        // 현재 위치 tracking
+        if(getArguments() != null){
+            RestaurantItem item = (RestaurantItem) getArguments().getSerializable("item");
+            CameraPosition currentcameraPosition = naverMap.getCameraPosition();
+            CameraPosition cameraPosition = new CameraPosition(new LatLng(item.getLat() + 0.005 , item.getLon()), currentcameraPosition.zoom);
+            naverMap.setCameraPosition(cameraPosition);
+
+            // Linear Search
+            int idx = 0;
+            for(RestaurantItem res : res_list){
+                if(res.getName().equals(item.getName())){
+                    break;
+                }
+                idx += 1;
+            }
+
+            infoWindows.get(idx).open(markers.get(idx));
+        }
+        else {
+            naverMap.setLocationSource(locationSource);
+            naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
+        }
+
+
+        // #######################################3
+        // Click Event 처리 부분
 
         // Marker Click Event 처리
         int size = markers.size();

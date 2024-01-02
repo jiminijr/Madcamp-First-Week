@@ -85,6 +85,4 @@ public class RestaurantItem implements Serializable {
     public double getLat() {return lat;}
     public double getLon() {return lon;}
     public String getLink(){return link;}
-
-
 }
