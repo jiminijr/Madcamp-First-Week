@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -26,6 +27,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     private final Context context;
     private final ArrayList<RestaurantItem> restaurantList;
+    private Fragment currentFragment;
     private ArrayList<RestaurantItem> filtered_restaurantList;
     // 클릭 이벤트 리스너 인터페이스
     public interface OnItemClickListener {
@@ -34,10 +36,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     private OnItemClickListener listener;
 
-    public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList) {
+    public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList, Fragment currentFragment) {
         this.context = context;
         this.restaurantList = restaurantList;
         this.filtered_restaurantList = restaurantList;
+        this.currentFragment = currentFragment;
     }
 
     @Override
@@ -110,11 +113,9 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         if(maplinkIcon != null) {
             maplinkIcon.setOnClickListener(v ->{
                 // map에 연결 -> Navcontroller 가져와서 map 이동 -> Camera를 대응하는 것으로 설정 -> info window activate
-                NavController navController = Navigation.findNavController(detailsView);
-                if(navController != null) {
-                    navController.popBackStack();
-                    navController.navigate(R.id.navigation_notifications);
-                }
+                NavController navController = NavHostFragment.findNavController(currentFragment);
+                navController.popBackStack();
+                navController.navigate(R.id.navigation_notifications);
             });
         }
     }

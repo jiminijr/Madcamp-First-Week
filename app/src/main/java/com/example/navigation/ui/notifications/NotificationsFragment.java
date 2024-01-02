@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import com.example.navigation.MarkerAdapter;
-import com.example.navigation.MarkerItem;
 import com.example.navigation.R;
 import com.example.navigation.RestaurantItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

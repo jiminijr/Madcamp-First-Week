@@ -8,6 +8,11 @@ import android.widget.ImageView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
+import androidx.navigation.NavHostController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
@@ -18,11 +23,13 @@ import java.util.List;
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
 
     private Context context;
+    private Fragment currentFragment;
     private List<RestaurantItem> restaurantList;
 
-    public GalleryAdapter(Context context, List<RestaurantItem> restaurantList) {
+    public GalleryAdapter(Context context, List<RestaurantItem> restaurantList, Fragment currentFragment) {
         this.context = context;
         this.restaurantList = restaurantList;
+        this.currentFragment = currentFragment;
     }
 
     @NonNull
@@ -81,13 +88,17 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         List<RestaurantItem> filteredList = getRestaurantsWithTag(tag);
 
         RecyclerView recyclerView = dialog.findViewById(R.id.dialog_recycler_view);
-        RestaurantAdapter adapter = new RestaurantAdapter(context, (ArrayList<RestaurantItem>) filteredList);
+        RestaurantAdapter adapter = new RestaurantAdapter(context, (ArrayList<RestaurantItem>) filteredList, currentFragment);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
         ImageButton closeButton = dialog.findViewById(R.id.close_button);
         closeButton.setOnClickListener(v -> dialog.dismiss());
 
+        NavController navController = NavHostFragment.findNavController(currentFragment);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+                    dialog.dismiss();
+                });
         dialog.show();
     }
 

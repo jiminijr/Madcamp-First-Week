@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
         // RecyclerView 설정
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RestaurantAdapter(getContext(), (ArrayList<RestaurantItem>) restaurantList);
+        adapter = new RestaurantAdapter(getContext(), (ArrayList<RestaurantItem>) restaurantList, this);
         recyclerView.setAdapter(adapter);
 
         // Item 클릭 리스너

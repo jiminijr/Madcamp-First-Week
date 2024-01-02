@@ -31,7 +31,7 @@ public class DashboardFragment extends Fragment {
 
         // RecyclerView 설정
         RecyclerView recyclerView = binding.galleryRecyclerview;
-        GalleryAdapter adapter = new GalleryAdapter(getContext(), restaurantList);
+        GalleryAdapter adapter = new GalleryAdapter(getContext(), restaurantList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
