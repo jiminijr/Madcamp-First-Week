@@ -142,7 +142,8 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
         }
 
         // 현재 위치 tracking
-        if(getArguments() != null){
+        naverMap.setLocationSource(locationSource);
+        if(getArguments() != null){ // 만약 매장-지도버튼으로 넘어왔다면
             RestaurantItem item = (RestaurantItem) getArguments().getSerializable("item");
             CameraPosition currentcameraPosition = naverMap.getCameraPosition();
             CameraPosition cameraPosition = new CameraPosition(new LatLng(item.getLat() + 0.005 , item.getLon()), currentcameraPosition.zoom);
@@ -159,10 +160,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
 
             infoWindows.get(idx).open(markers.get(idx));
         }
-        else {
-            naverMap.setLocationSource(locationSource);
-            naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
-        }
+        else { naverMap.setLocationTrackingMode(LocationTrackingMode.Face);}
 
 
         // #######################################3
@@ -210,11 +208,11 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
                     CameraPosition currentcameraPosition = naverMap.getCameraPosition();
                     CameraPosition cameraPosition = new CameraPosition(new LatLng(cur), currentcameraPosition.zoom);
                     naverMap.setCameraPosition(cameraPosition);
-                    naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
                 }
                 for(InfoWindow infoWindow : infoWindows){
                     infoWindow.close();
                 }
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
             }
         });
     }
