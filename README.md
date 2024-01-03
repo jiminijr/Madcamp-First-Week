@@ -169,7 +169,7 @@ targetSdk = 33
 
 ## 사용 언어
 
-java, Kotlin
+java, kotlin
 
 
 
