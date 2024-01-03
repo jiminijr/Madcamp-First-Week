@@ -29,15 +29,46 @@
 >  자유 주제
 
 ## 2. 개발 환경
-> Android Studio 
-> 
-> compileSDKversion :
->  
-> buildToolsversion : SDK 21 기준 호환
-> 
-> Firebase Version : 
+
+Android Studio 
+
+compileSDKversion :
+ 
+buildToolsversion :
+
+Firebase Version : 
 
 ## 3. 구현 기능 
+### 내부 데이터 관리
+---
+- **restaurants.json**을 사용하여 모든 탭 간 데이터 연동
+
+> ex.
+> 
+>  "restaurant": [
+>    {
+>      "id":"1",
+>      "out_img": "out1",
+>      "food_img": "food1",
+>      "menu": [{"menu_name":"미박삼겹살", "menu_img":"menu_1_1", "menu_price":"13000"},
+>        {"menu_name":"특목살", "menu_img":"menu_1_2", "menu_price":"13000"},
+>        {"menu_name":"갈비본살", "menu_img":"menu_1_3", "menu_price":"19000"}],
+>      "name": "목구멍",
+>      "address": "봉명동 626-1",
+>      "number": "010-7503-9399",
+>      "info": "봉명동 삼겹살 맛집!",
+>      "tag": "#고기",
+>      "lat": "36.358297",
+>      "lon": "127.345035",
+>      "link": "www.moggumung.com/"
+>    },
+>
+> 
+
+- **내부 저장소 이용**을 위해 아래 경로의 userdata.json 등 json 파일을 저장 후 데이터로 사용
+  
+> /data/data/com.example.navigation/files
+
 
 ### Splash
 ---
