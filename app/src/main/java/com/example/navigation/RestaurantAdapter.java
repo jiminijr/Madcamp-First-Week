@@ -211,9 +211,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             private int fav_state = 0; // 1이면 fav, 0이면 fav 아님, 2면 state 변경없이 진행
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                if(state != 2){
-                    fav_state = state;
-                }
 
                 String query = constraint.toString();
 
