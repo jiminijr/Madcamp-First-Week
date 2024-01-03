@@ -84,6 +84,7 @@ Firebase Version :
 ---
 > Tab 1의 기본 화면
 
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d15636d-edf6-433e-8d31-cc66bd1ea63d" width="200" height="400"/>
 
 
 - ConstraintLayout, CardView, RecyclerView 등을 사용하여 구현
