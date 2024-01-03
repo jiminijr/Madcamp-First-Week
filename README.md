@@ -100,9 +100,12 @@ Firebase Version :
 - 개별 식당 카드를 누르면, 판매하는 3가지 메뉴 정보와 가격이 나타남
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/68ef5c03-9c54-4fd2-9559-11f1a28c1192" width="200" height="400"/>
+
+
 - 통화 아이콘을 누르면 해당되는 식당의 번호로 전화를 걸 수 있음
 
-  
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/d2a9d1f9-c6ca-40e1-abb7-173b07e553c2" width="200" height="400"/>
+
 - 지도 아이콘을 누르면 **tab 3의 Map*** 화면으로 이동하여 해당되는 식당의 지도 마커로 이동함
 
   
@@ -111,6 +114,12 @@ Firebase Version :
 
 ### Tab 2 - Tags
 ---
+> 갤러리 뷰를 사용하여 태그를 통한 음식 추천 및 해당하는 음식점 안내
+
+
+- 앨범 형식으로 메뉴 추천 구현
+- 각각의 앨범 항목을 클릭하면 해당 음식을 판매하는 식당 안내
+- tab 1과 연동하여 음식점 정보를 누를 시 tab 1과 동일하게 음식점 상세 정보 페이지 표출
 
 ### Tab 3 - Map
 ---
