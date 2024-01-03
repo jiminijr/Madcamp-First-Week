@@ -1,5 +1,5 @@
 # '카이스트 맛집, 도대체 어디?': 카이맛(Kaimat)
-### 카이맛은 어쩌구 저쩌구 
+### 맛집 찾기 어려운 카이스트 학생 다 모여라! 카이스트 주변 맛집 검색 어플, 카이맛(Kaimat)
 
 ## 1. 프로젝트 소개 
 [카이스트 몰입캠프 2023W 1주차]
@@ -30,13 +30,13 @@
 
 ## 2. 개발 환경
 
-Android Studio 
+Android Studio 2022.3.1 
 
-compileSDKversion :
- 
-buildToolsversion :
+compileSDKversion : 34
 
-Firebase Version : 
+minSdk = 26
+
+targetSdk = 33
 
 ## 3. 구현 기능 
 ### 내부 데이터 관리
@@ -119,6 +119,8 @@ Firebase Version :
 
 - 통화 아이콘을 누르면 해당되는 맛집의 번호로 전화를 걸 수 있음
 
+- 
+
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/d2a9d1f9-c6ca-40e1-abb7-173b07e553c2" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/4fbd6748-8d97-4531-80e0-e3cc06530c62" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/ab2c517f-466c-4596-88d9-fabadc3066bd" width="200" height="400"/>
@@ -126,6 +128,8 @@ Firebase Version :
 
 
 - 지도 아이콘을 누르면 **tab 3의 Map*** 화면으로 이동하여 해당되는 맛집의 지도 마커로 이동함
+
+
 
   
 - 리뷰 아이콘을 누르면 다른 사람의 리뷰가 나타나며 상단에는 '리뷰 등록' 아이콘과 '팝업 닫기' 아이콘이 존재함
@@ -142,8 +146,6 @@ Firebase Version :
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/38fa00a2-60f9-455c-8708-4ae284a66449" width="200" height="400"/>
 
 
-
-
 - 앨범 형식으로 메뉴 추천 구현
 - 각각의 앨범 항목을 클릭하면 해당 음식을 판매하는 맛집 안내
 - tab 1과 연동하여 음식점 정보를 누를 시 tab 1과 동일하게 맛집 상세 정보 페이지 표출
@@ -158,6 +160,9 @@ Firebase Version :
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6eee645a-25bf-4822-9f83-d0dea9acb05c" width="200" height="400"/>
 
 
+## 사용 언어
+
+java, Kotlin
 
 - 확대, 축소가 가능함
 - 현재 위치 아이콘을 누르면 현재 위치가 표시됨
