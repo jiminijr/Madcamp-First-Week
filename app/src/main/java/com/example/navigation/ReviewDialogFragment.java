@@ -64,19 +64,20 @@ public class ReviewDialogFragment extends DialogFragment {
                         Bitmap imageBitmap = (Bitmap) extras.get("data");
                         imageViewSelectedImage.setImageBitmap(imageBitmap);
                         // 이미지 URI 저장 로직 추가 (임시 파일 저장 등)
+                        userJsonManager.saveBitMap(imageBitmap);
                     }
                 }
         );
 
         // 갤러리에서 이미지를 가져오는 ActivityResultLauncher
         galleryLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> {
-                    if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                        imageUri = result.getData().getData();
-                        imageViewSelectedImage.setImageURI(imageUri);
-                    }
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    imageUri = result.getData().getData();
+                    imageViewSelectedImage.setImageURI(imageUri);
                 }
+            }
         );
     }
 

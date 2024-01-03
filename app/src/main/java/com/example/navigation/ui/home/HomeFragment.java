@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
                     // SearchFragment를 추가하고 LinearLayout을 보이게 함
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .add(R.id.search_tab_container, searchFragment)
-                            .addToBackStack(null)
+                            .addToBackStack("search")
                             .commit();
                     searchTabContainer.setVisibility(View.VISIBLE);
                     floatingActionButton.setImageResource(R.drawable.ic_cross_black_24dp); // 새 아이콘으로 변경
@@ -105,12 +105,12 @@ public class HomeFragment extends Fragment {
 
                 state = 1 - state;
                 if(state == 1){
-                    adapter.setState(state);
+                    adapter.setFavState(state);
                     adapter.getFilter().filter(current_search_text); // True
                     favoriteActionButton.setImageResource(R.drawable.ic_cross_black_24dp);
                 }
                 else{
-                    adapter.setState(state);
+                    adapter.setFavState(state);
                     adapter.getFilter().filter(current_search_text); // False
                     favoriteActionButton.setImageResource(R.drawable.ic_heart_filled_black_24dp);
                 }

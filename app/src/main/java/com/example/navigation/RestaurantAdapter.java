@@ -1,9 +1,7 @@
 package com.example.navigation;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,8 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> implements Filterable {
@@ -37,25 +33,20 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private ArrayList<RestaurantItem> fav_filtered_restaurantList;
     private ArrayList<RestaurantItem> filtered_restaurantList;
     private ReviewAdapter recyclerViewadapter;
-    private int state;
+    private int fav_state;
+    private int search_state;
 
     private UserJsonManager userJsonManager;
     // 클릭 이벤트 리스너 인터페이스
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-    private List<Review> createDummyReviews() {
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("맛있어요!", "asd5", 2));
-        reviews.add(new Review("좋았습니다.", "asdasd4", 4));
-        // 여기에 더 많은 리뷰를 추가할 수 있습니다.
-        return reviews;
-    }
     private OnItemClickListener listener;
 
     public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList, Fragment currentFragment, UserJsonManager manager) {
         this.context = context;
-        this.state = 0;
+        this.fav_state = 0;
+        this.search_state = 0;
         this.restaurantList = restaurantList;
         this.fav_filtered_restaurantList = restaurantList;
         this.filtered_restaurantList = restaurantList;
@@ -201,14 +192,18 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         textPriceView.setText(menu.getMenuPrice() + "원");
     }
 
-    public void setState(int state){
-        this.state = state;
+    public void setFavState(int state){
+        this.fav_state = state;
+    }
+
+    public void setSearchState(int state){
+        this.search_state = state;
     }
 
     @Override
     public Filter getFilter(){
         Filter filter = new Filter() {
-            private int fav_state = 0; // 1이면 fav, 0이면 fav 아님, 2면 state 변경없이 진행
+
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
 
@@ -228,8 +223,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                     }
                     fav_filtered_restaurantList = tmp_filtered_restaurantList;
                 }
-
-                if(query.isEmpty()){
+                if(search_state == 0 || (search_state == 1 && query.isEmpty())){
                     filtered_restaurantList = fav_filtered_restaurantList;
                 }
                 else {

@@ -1,6 +1,7 @@
 package com.example.navigation;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -71,6 +72,10 @@ public class UserJsonManager {
             e.printStackTrace();
         }
         return reviews;
+    }
+
+    public void saveBitMap(Bitmap image){
+
     }
     // 즐겨찾기 버튼 구현
     public ArrayList<String> getFavoriteInfo(){

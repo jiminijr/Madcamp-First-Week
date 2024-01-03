@@ -18,6 +18,7 @@ import com.example.navigation.RestaurantAdapter;
 public class SearchFragment extends Fragment {
 
     private RestaurantAdapter adapter;
+    private TextView search ;
     public SearchFragment(RestaurantAdapter adapter){
         this.adapter = adapter;
     }
@@ -27,9 +28,9 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
+        adapter.setSearchState(1);
         // 입력 처리 + claer 버튼 조절
-        TextView search = (TextView) view.findViewById(R.id.search_text);
+        search = (TextView) view.findViewById(R.id.search_text);
         ImageButton clear = (ImageButton) view.findViewById(R.id.search_text_clear);
 
         clear.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +47,6 @@ public class SearchFragment extends Fragment {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.setState(2);
                 adapter.getFilter().filter(s);
                 clear.setVisibility(s.toString().length() > 0? View.VISIBLE:View.GONE);
             }
@@ -55,5 +55,12 @@ public class SearchFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        adapter.setSearchState(0);
+        search.setText(null);
     }
 }
