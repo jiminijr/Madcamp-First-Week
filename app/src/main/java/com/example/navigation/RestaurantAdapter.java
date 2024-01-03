@@ -31,7 +31,12 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private final Context context;
     private final ArrayList<RestaurantItem> restaurantList;
     private Fragment currentFragment;
+    private ArrayList<RestaurantItem> fav_filtered_restaurantList;
     private ArrayList<RestaurantItem> filtered_restaurantList;
+
+    private int state;
+
+    private UserJsonManager userJsonManager;
     // 클릭 이벤트 리스너 인터페이스
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
@@ -45,11 +50,14 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     }
     private OnItemClickListener listener;
 
-    public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList, Fragment currentFragment) {
+    public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList, Fragment currentFragment, UserJsonManager manager) {
         this.context = context;
+        this.state = 0;
         this.restaurantList = restaurantList;
+        this.fav_filtered_restaurantList = restaurantList;
         this.filtered_restaurantList = restaurantList;
         this.currentFragment = currentFragment;
+        this.userJsonManager = manager;
     }
 
     @Override
@@ -67,6 +75,10 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.numberTextView.setText(item.getNumber());
         holder.addressTextView.setText(item.getAddress());
         holder.infoTextView.setText(item.getInfo());
+
+        // 즐겨찾기 정보로 image view 설정
+        boolean fav = userJsonManager.isFavorite(item);
+        holder.favorite.setImageResource(fav? R.drawable.ic_heart_filled_black_24dp : R.drawable.ic_heart_unfilled_black_24dp);
 
         // 디버그 로그: 상세 정보 뷰의 현재 가시성 상태 출력
         Log.d("RestaurantAdapter", "Position " + position + " isExpanded: " + item.isExpanded());
@@ -91,6 +103,11 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         holder.itemView.setOnClickListener(v -> {
             item.setExpanded(!item.isExpanded());
             notifyItemChanged(holder.getBindingAdapterPosition());
+        });
+
+        holder.favorite.setOnClickListener(v -> {
+            boolean currentFav = userJsonManager.invertFavorite(item);
+            holder.favorite.setImageResource(currentFav? R.drawable.ic_heart_filled_black_24dp : R.drawable.ic_heart_unfilled_black_24dp);
         });
     }
 
@@ -129,7 +146,6 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 NavController navController = NavHostFragment.findNavController(currentFragment);
                 navController.popBackStack();
                 navController.navigate(R.id.navigation_notifications, bundle);
-
             });
         }
         ImageView reviewIcon = detailsView.findViewById(R.id.review);
@@ -164,25 +180,51 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         textPriceView.setText(menu.getMenuPrice() + "원");
     }
 
+    public void setState(int state){
+        this.state = state;
+    }
+
     @Override
     public Filter getFilter(){
-        return new Filter() {
+        Filter filter = new Filter() {
+            private int fav_state = 0; // 1이면 fav, 0이면 fav 아님, 2면 state 변경없이 진행
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
+                if(state != 2){
+                    fav_state = state;
+                }
+
                 String query = constraint.toString();
+
+                if (fav_state == 0) {
+                    fav_filtered_restaurantList = restaurantList;
+                }
+                else if(fav_state == 1){
+                    ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
+                    ArrayList<String> fav_info = userJsonManager.getFavoriteInfo();
+                    for(int i=0; i<restaurantList.size(); ++i){
+                        String f = fav_info.get(i);
+                        if(f.equals("1")){
+                            tmp_filtered_restaurantList.add(restaurantList.get(i));
+                        }
+                    }
+                    fav_filtered_restaurantList = tmp_filtered_restaurantList;
+                }
+
                 if(query.isEmpty()){
-                    filtered_restaurantList = restaurantList;
+                    filtered_restaurantList = fav_filtered_restaurantList;
                 }
-                else{
-                     ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
-                     for(RestaurantItem item : restaurantList){
-                         if(item.getName().toLowerCase().contains(query.toLowerCase())
-                                 || item.getAddress().toLowerCase().contains(query.toLowerCase())){
-                             tmp_filtered_restaurantList.add(item);
-                         }
-                     }
-                     filtered_restaurantList = tmp_filtered_restaurantList;
+                else {
+                    ArrayList<RestaurantItem> tmp_filtered_restaurantList = new ArrayList<>();
+                    for (RestaurantItem item : fav_filtered_restaurantList) {
+                        if (item.getName().toLowerCase().contains(query.toLowerCase())
+                                || item.getAddress().toLowerCase().contains(query.toLowerCase())) {
+                            tmp_filtered_restaurantList.add(item);
+                        }
+                    }
+                    filtered_restaurantList = tmp_filtered_restaurantList;
                 }
+
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = filtered_restaurantList;
                 return filterResults;
@@ -190,10 +232,16 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                    filtered_restaurantList = (ArrayList<RestaurantItem>) results.values;
-                    notifyDataSetChanged();
+                filtered_restaurantList = (ArrayList<RestaurantItem>) results.values;
+                notifyDataSetChanged();
             }
         };
+        return filter;
+    }
+
+    public void gather_favorite(){
+        ArrayList<String> favorite = userJsonManager.getFavoriteInfo();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -207,6 +255,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
+        ImageView favorite;
         TextView nameTextView;
         TextView numberTextView;
         TextView addressTextView;
@@ -224,6 +273,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             infoTextView = itemView.findViewById(R.id.restaurant_info_view);
             detailsView = itemView.findViewById(R.id.details_container); // 상세 정보 뷰 초기화
             reviewButton = itemView.findViewById(R.id.review); // 리뷰 버튼 초기화
+            favorite = itemView.findViewById(R.id.favorite);
 
         }
     }

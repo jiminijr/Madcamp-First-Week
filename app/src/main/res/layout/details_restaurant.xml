@@ -166,7 +166,6 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:src="@drawable/ic_review"
-        android:clickable="true"
         app:layout_constraintEnd_toEndOf="@+id/frame3"
         app:layout_constraintStart_toEndOf="@+id/frame3"
         app:layout_constraintStart_toStartOf="@+id/frame3"

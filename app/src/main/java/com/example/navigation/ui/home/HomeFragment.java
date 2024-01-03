@@ -7,15 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navigation.ActivityCallback;
 import com.example.navigation.R;
 import com.example.navigation.RestaurantAdapter;
 import com.example.navigation.RestaurantItem;
+import com.example.navigation.UserJsonManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -38,7 +41,11 @@ public class HomeFragment extends Fragment {
         // RecyclerView 설정
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new RestaurantAdapter(getContext(), (ArrayList<RestaurantItem>) restaurantList, this);
+
+        ActivityCallback callback = (ActivityCallback) getActivity();
+        UserJsonManager manager = callback.getUserJsonManager();
+
+        adapter = new RestaurantAdapter(getContext(), (ArrayList<RestaurantItem>) restaurantList, this, manager);
         recyclerView.setAdapter(adapter);
 
         // Item 클릭 리스너
@@ -52,7 +59,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-    // Floating Button 처리
+    // Search Floating Button 처리
         FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.search_tab);
         LinearLayout searchTabContainer = (LinearLayout) view.findViewById(R.id.search_tab_container);
         searchTabContainer.setVisibility(View.GONE); // 초기 상태에서 숨김
@@ -81,6 +88,31 @@ public class HomeFragment extends Fragment {
                     searchTabContainer.setVisibility(View.GONE);
                     floatingActionButton.setImageResource(R.drawable.ic_search_black_24dp);
                     floatingActionButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.light_blue_200)));
+                }
+            }
+        });
+
+        FloatingActionButton favoriteActionButton = (FloatingActionButton) view.findViewById(R.id.favorite_gather);
+        favoriteActionButton.setOnClickListener(new View.OnClickListener() {
+
+            private int state = 0;
+            @Override
+            public void onClick(View v) {
+                CharSequence current_search_text;
+                TextView search_view = (TextView) view.findViewById(R.id.search_text);
+                if(search_view == null) current_search_text = "";
+                else current_search_text = search_view.getText();
+
+                state = 1 - state;
+                if(state == 1){
+                    adapter.setState(state);
+                    adapter.getFilter().filter(current_search_text); // True
+                    favoriteActionButton.setImageResource(R.drawable.ic_cross_black_24dp);
+                }
+                else{
+                    adapter.setState(state);
+                    adapter.getFilter().filter(current_search_text); // False
+                    favoriteActionButton.setImageResource(R.drawable.ic_heart_filled_black_24dp);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.example.navigation;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -12,12 +13,15 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.navigation.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityCallback{
 
     private ActivityMainBinding binding;
+    private UserJsonManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 내부 저장소 파일 만들기
+        manager = new UserJsonManager("userdata.json", this);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -34,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+
+    @Override
+    public UserJsonManager getUserJsonManager(){
+        return manager;
     }
 
 }

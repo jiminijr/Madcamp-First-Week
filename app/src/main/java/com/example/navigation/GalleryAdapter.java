@@ -25,14 +25,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private Context context;
     private Fragment currentFragment;
     private List<RestaurantItem> restaurantList;
+    private UserJsonManager userJsonManager;
 
     private List<RestaurantItem> unique_tag_restaurantList;
 
-    public GalleryAdapter(Context context, List<RestaurantItem> restaurantList, Fragment currentFragment) {
+    public GalleryAdapter(Context context, List<RestaurantItem> restaurantList, Fragment currentFragment, UserJsonManager manager) {
         this.context = context;
         this.restaurantList = restaurantList;
         this.currentFragment = currentFragment;
         this.Delete_Duplicate();
+        this.userJsonManager = manager;
     }
 
     private void Delete_Duplicate(){
@@ -103,7 +105,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         List<RestaurantItem> filteredList = getRestaurantsWithTag(tag);
 
         RecyclerView recyclerView = dialog.findViewById(R.id.dialog_recycler_view);
-        RestaurantAdapter adapter = new RestaurantAdapter(context, (ArrayList<RestaurantItem>) filteredList, currentFragment);
+        RestaurantAdapter adapter = new RestaurantAdapter(context, (ArrayList<RestaurantItem>) filteredList, currentFragment, userJsonManager);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 

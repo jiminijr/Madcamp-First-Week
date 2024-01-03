@@ -80,6 +80,17 @@
         app:layout_constraintTop_toBottomOf="@+id/restaurant_address_view"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageView
+        android:id="@+id/favorite"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="15dp"
+        android:src="@drawable/ic_heart_unfilled_black_24dp"
+        app:layout_constraintBottom_toTopOf="@+id/restaurant_info_view"
+        app:layout_constraintEnd_toEndOf="@+id/restaurant_number_view"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_name_view"
+        app:layout_constraintVertical_bias="0.303" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

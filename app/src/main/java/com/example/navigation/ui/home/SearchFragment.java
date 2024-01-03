@@ -46,6 +46,7 @@ public class SearchFragment extends Fragment {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.setState(2);
                 adapter.getFilter().filter(s);
                 clear.setVisibility(s.toString().length() > 0? View.VISIBLE:View.GONE);
             }
