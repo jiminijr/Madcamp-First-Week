@@ -11,9 +11,9 @@
         android:id="@+id/frame1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/frame2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.33">
 
         <ImageView
@@ -25,36 +25,36 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#66000000"/>
+            android:background="#66000000" />
 
         <TextView
             android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text1_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frame2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/frame1"
         app:layout_constraintEnd_toStartOf="@+id/frame3"
+        app:layout_constraintStart_toEndOf="@+id/frame1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.33">
 
         <ImageView
@@ -73,10 +73,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
 
         <TextView
@@ -84,19 +84,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frame3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/frame2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/frame2"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.33">
 
         <ImageView
@@ -115,20 +115,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text3_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:textSize="12sp"
-            android:textColor="@android:color/white"
+            android:layout_margin="8dp"
             android:fontWeight="1000"
-            android:layout_margin="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
     </FrameLayout>
 
 
@@ -136,11 +136,11 @@
         android:id="@+id/icon_phone_call"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:clickable="true"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:src="@drawable/ic_phone_call"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="@id/frame2"
+        app:layout_constraintEnd_toEndOf="@+id/frame1"
         app:layout_constraintStart_toStartOf="@id/frame1"
         app:layout_constraintTop_toBottomOf="@id/frame1"
         app:layout_constraintWidth_percent="0.01" />
@@ -150,13 +150,27 @@
         android:id="@+id/icon_map"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:clickable="true"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:src="@drawable/ic_map_black_24dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="@id/frame3"
+        app:layout_constraintEnd_toEndOf="@+id/frame2"
         app:layout_constraintStart_toStartOf="@id/frame2"
         app:layout_constraintTop_toBottomOf="@id/frame2"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <ImageView
+        android:id="@+id/review"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_plus_black_24dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="@+id/frame3"
+        app:layout_constraintStart_toEndOf="@+id/frame3"
+        app:layout_constraintStart_toStartOf="@+id/frame3"
+        app:layout_constraintTop_toBottomOf="@+id/frame3"
         app:layout_constraintWidth_percent="0.01" />
 
     <View

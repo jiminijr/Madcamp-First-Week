@@ -26,6 +26,7 @@ public class JsonParser {
 
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String id = jsonObject.getString("id");
                 String outImgName = jsonObject.getString("out_img");
                 int outImgResId = context.getResources().getIdentifier(outImgName, "drawable", context.getPackageName());
                 String foodImgName = jsonObject.getString("food_img");
@@ -49,7 +50,7 @@ public class JsonParser {
                     String menuPrice = menuObject.getString("menu_price");
                     menuList.add(new Menu(menuName, menuImgResId, menuPrice));
                 }
-                restaurantList.add(new RestaurantItem(outImgResId, foodImgResId, name, address, number, info, tag, menuList, lat, lon, link));
+                restaurantList.add(new RestaurantItem(id, outImgResId, foodImgResId, name, address, number, info, tag, menuList, lat, lon, link));
             }
         } catch (Exception e) {
             e.printStackTrace();

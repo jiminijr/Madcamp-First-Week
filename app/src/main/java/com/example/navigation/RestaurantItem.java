@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class RestaurantItem implements Serializable {
+    private String id;
     private int outImg;
     private String name;
     private String number;
@@ -25,8 +26,9 @@ public class RestaurantItem implements Serializable {
     private boolean isExpanded;
 
     // Updated constructor to include new fields
-    public RestaurantItem(int outImgResId, int foodImgResId, String name, String address, String number,
+    public RestaurantItem(String id, int outImgResId, int foodImgResId, String name, String address, String number,
                           String info, String tag, List<Menu> menuList, double lat, double lon, String link){
+        this.id = id;
         this.outImg = outImgResId;
         this.foodImg = foodImgResId;
         this.name = name;
@@ -50,6 +52,8 @@ public class RestaurantItem implements Serializable {
         isExpanded = expanded;
     }
     // Existing getters
+
+    public String getId(){return id;}
     public int getOutImg() {
         return outImg;
     }

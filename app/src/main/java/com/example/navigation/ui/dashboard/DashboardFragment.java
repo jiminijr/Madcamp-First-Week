@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.navigation.ActivityCallback;
 import com.example.navigation.RestaurantItem;
+import com.example.navigation.UserJsonManager;
 import com.example.navigation.databinding.FragmentDashboardBinding;
 import com.example.navigation.GalleryAdapter;
 import java.util.List;
@@ -31,7 +34,11 @@ public class DashboardFragment extends Fragment {
 
         // RecyclerView 설정
         RecyclerView recyclerView = binding.galleryRecyclerview;
-        GalleryAdapter adapter = new GalleryAdapter(getContext(), restaurantList, this);
+
+        ActivityCallback callback = (ActivityCallback) getActivity();
+        UserJsonManager manager = callback.getUserJsonManager();
+
+        GalleryAdapter adapter = new GalleryAdapter(getContext(), restaurantList, this, manager);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
 
