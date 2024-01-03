@@ -82,6 +82,14 @@ Firebase Version :
 
 ### Tab 1 - Restaurants
 ---
+> Tab 1의 기본 화면
+
+
+
+- ConstraintLayout, cardview, recyclerview 등을 사용하여 구현
+- 식당 목록을 나타내며, 검색 아이콘을 누를 시 상호명 및 주소를 기준으로 검색 가능
+- 개별 하트 아이콘을 누르면 '찜'으로 설정되어 우측 하단 하트 버튼을 누르면 찜한 식당 목록으로 필터링 가능함
+- 필터링 된 경우에 검색 아이콘을 누를 시 찜한 식당 내에서 검색 기능이 작동함
 
 ### Tab 2 - Tags
 ---
