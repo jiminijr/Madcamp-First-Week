@@ -105,6 +105,10 @@ Firebase Version :
 - 통화 아이콘을 누르면 해당되는 맛집의 번호로 전화를 걸 수 있음
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/d2a9d1f9-c6ca-40e1-abb7-173b07e553c2" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/4fbd6748-8d97-4531-80e0-e3cc06530c62" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/ab2c517f-466c-4596-88d9-fabadc3066bd" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/12c03e2f-764e-4dc7-9e3c-6fd05466f1c3" width="200" height="400"/>
+
 
 - 지도 아이콘을 누르면 **tab 3의 Map*** 화면으로 이동하여 해당되는 맛집의 지도 마커로 이동함
 
@@ -118,6 +122,12 @@ Firebase Version :
 
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/7d4522b0-a916-4406-800e-4aa89a90df63" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/2f6f7c68-de5d-4e3a-8811-6159057ac462" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/fe7c4321-558d-4d48-ade2-4c2272710b4a" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/03894742-fffe-4a8b-924e-654a0b43d1e3" width="200" height="400"/>
+
+
+
 
 
 
