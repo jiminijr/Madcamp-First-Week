@@ -105,9 +105,6 @@ targetSdk = 33
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d87b141-2f39-4009-8a04-cb03aa1051e2" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/cd1b8b23-4c7c-4965-a898-57ecf5fca5df" width="200" height="400"/>
 
-
-
-
 - ConstraintLayout, CardView, RecyclerView 등 사용
 - 개별 맛집 카드를 누르면, 판매하는 3가지 메뉴 정보와 가격이 나타남
 
@@ -160,12 +157,14 @@ targetSdk = 33
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6eee645a-25bf-4822-9f83-d0dea9acb05c" width="200" height="400"/>
 
 
+- 확대, 축소가 가능함
+- 현재 위치 아이콘을 누르면 현재 위치가 표시됨
+- 지도 위 마커를 누르면 맛집 정보가 나타남
+
+
 ## 사용 언어
 
 java, Kotlin
 
-- 확대, 축소가 가능함
-- 현재 위치 아이콘을 누르면 현재 위치가 표시됨
-- 지도 위 마커를 누르면 맛집 정보가 나타남
 
 
