@@ -24,7 +24,55 @@ public class UserJsonManager {
         this.res_list = com.example.navigation.util.JsonParser.parseRestaurantsJson(context,"restaurants.json");
         this.checkAndCreateFile();
     }
+    private int search(RestaurantItem item){
+        int i = 0;
+        for(; i<res_list.size(); i++){
+            RestaurantItem curitem = res_list.get(i);
+            if(curitem.getId().equals(item.getId())){
+                break;
+            }
+        }
+        return i;
+    }
+    // 리뷰 관련
+    public void saveReview(Review review, RestaurantItem item){
+        int idx = this.search(item);
+        try {
+            JSONArray jsonArray = json_obj.getJSONArray("userdata");
+            JSONArray reviewArray = jsonArray.getJSONObject(idx).getJSONArray("review");
+            JSONObject reviewObject = new JSONObject();
+            reviewObject.put("text",review.getReviewText());
+            reviewObject.put("rating",review.getRating());
+            // reviewObject.put("image",review.getImageUrl());
+            reviewArray.put(reviewObject);
+            this.saveCurrentState();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    public ArrayList<Review> getReviewList(RestaurantItem item){
+        ArrayList<Review> reviews = new ArrayList<>();
+        try {
+            int idx = this.search(item);
+            JSONArray reviewArray = json_obj.getJSONArray("userdata")
+                    .getJSONObject(idx).getJSONArray("review");
+            for(int i=0 ; i< reviewArray.length(); ++i){
+                JSONObject object = reviewArray.getJSONObject(i);
+                String text=  object.getString("text");
+                float rating = Float.parseFloat(object.getString("rating"));
+                // String image = object.getString("image");
+                String image = "";
+                reviews.add(new Review(text, image, rating));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return reviews;
+    }
+    // 즐겨찾기 버튼 구현
     public ArrayList<String> getFavoriteInfo(){
         ArrayList<String> favorite = new ArrayList<>();
         try{
@@ -54,14 +102,8 @@ public class UserJsonManager {
         return result;
     }
     public boolean invertFavorite(RestaurantItem item){
-        int i = 0;
         int cur = 0;
-        for(; i<res_list.size(); i++){
-            RestaurantItem curitem = res_list.get(i);
-            if(curitem.getId().equals(item.getId())){
-                break;
-            }
-        }
+        int i = this.search(item);
         try {
             JSONObject jsonObject = json_obj.getJSONArray("userdata").getJSONObject(i);
             String tmp = jsonObject.get("favorite").toString();
@@ -75,16 +117,11 @@ public class UserJsonManager {
         return cur==1;
     }
     public boolean isFavorite(RestaurantItem item){
-        int i = 0;
-        for(; i<res_list.size(); i++){
-            RestaurantItem curitem = res_list.get(i);
-            if(curitem.getId().equals(item.getId())){
-                break;
-            }
-        }
-        return this.getFavorite(i).equals("1");
+        return this.getFavorite(this.search(item)).equals("1");
     }
 
+
+    // 파일 기본 설정 관련
     private void checkAndCreateFile(){
         File file = new File(context.getFilesDir(),filename);
         if(!file.exists()){
@@ -133,7 +170,7 @@ public class UserJsonManager {
                 JSONObject restaurant = new JSONObject();
                 restaurant.put("id", item.getId());
                 restaurant.put("favorite", "0");
-                restaurant.put("review", new JSONObject());
+                restaurant.put("review", new JSONArray());
                 userdata_list.put(restaurant);
             }
             content.put("userdata", userdata_list);

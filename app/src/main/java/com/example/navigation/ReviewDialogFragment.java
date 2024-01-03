@@ -2,23 +2,36 @@ package com.example.navigation;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.fragment.app.DialogFragment;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ReviewDialogFragment extends DialogFragment {
 
     private EditText editTextReview;
     private RatingBar ratingBar;
     private ImageView imageViewSelectedImage;
+    private RestaurantItem item;
+    private UserJsonManager userJsonManager;
+    private ReviewAdapter adapter;
+
+    public ReviewDialogFragment(RestaurantItem item, UserJsonManager userJsonManager, ReviewAdapter adapter){
+        this.item = item;
+        this.userJsonManager = userJsonManager;
+        this.adapter = adapter;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -26,88 +39,48 @@ public class ReviewDialogFragment extends DialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_review, null);
 
-        editTextReview = view.findViewById(R.id.editTextReview);
-        ratingBar = view.findViewById(R.id.ratingBar);
-        imageViewSelectedImage = view.findViewById(R.id.imageViewSelectedImage);
-
+        editTextReview = view.findViewById(R.id.review_text_input);
+        ratingBar = view.findViewById(R.id.review_rating);
+        imageViewSelectedImage = view.findViewById(R.id.imageViewSelectedImage); // 이미지 입력 부분
         // 이미지 선택 버튼 리스너 설정
-        imageViewSelectedImage.setOnClickListener(v -> selectImage());
+        imageViewSelectedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+               if(camera.resolveActivity(getActivity().getPackageManager())!=null){
+                   startActivityForResult(camera, 0);
+               }
+            }
+        });
 
         // 리뷰 제출 버튼 리스너 설정
-        Button submitButton = view.findViewById(R.id.buttonSubmitReview);
-        submitButton.setOnClickListener(v -> submitReview());
+        Button submitButton = view.findViewById(R.id.review_submit_button);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String review_text = editTextReview.getText().toString();
+                float rating = ratingBar.getRating();
+                Review review = new Review(review_text,"", rating);
+                if(review_text.isEmpty()){
+                    Toast.makeText(getContext(),"텍스트를 입력해주세요", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                userJsonManager.saveReview(review, item);
+                adapter.update();
+                dismiss();
+            }
+        });
 
         builder.setView(view);
-        return builder.create();
+        AlertDialog dialog = builder.create();
+        return dialog;
     }
-
-    private static final int PICK_IMAGE_REQUEST = 1;
-
-    private void selectImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(android.content.intent, PICK_IMAGE_REQUEST);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            Uri selectedImageUri = data.getData();
-            imageViewSelectedImage.setImageURI(selectedImageUri);
-        }
-    }
-
-    private void submitReview() {
-        String reviewText = editTextReview.getText().toString();
-        float rating = ratingBar.getRating();
-        // 이미지 URI를 문자열로 변환
-        String imageUrl = imageViewSelectedImage.getTag() != null ? imageViewSelectedImage.getTag().toString() : "";
-
-        try {
-            JSONObject reviewJson = new JSONObject();
-            reviewJson.put("reviewText", reviewText);
-            reviewJson.put("rating", rating);
-            reviewJson.put("imageUrl", imageUrl);
-
-            // JSON 데이터를 내부 저장소에 저장
-            saveReviewToFile(reviewJson);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void saveReviewToFile(JSONObject reviewJson) {
-        try {
-            // 파일 경로
-            File file = new File(getContext().getFilesDir(), "userdata.json");
-            JSONObject existingData;
-
-            // 파일이 존재하면 기존 데이터 로드
-            if (file.exists()) {
-                String content = new String(Files.readAllBytes(file.toPath()));
-                existingData = new JSONObject(content);
-            } else {
-                // 파일이 없으면 새로운 JSON 객체 생성
-                existingData = new JSONObject();
-                existingData.put("userdata", new JSONArray());
-            }
-
-            // 기존 JSON 객체에 새 리뷰 데이터 추가
-            JSONArray userdataArray = existingData.getJSONArray("userdata");
-            JSONObject newUserData = new JSONObject();
-            newUserData.put("id", String.valueOf(userdataArray.length() + 1));
-            newUserData.put("favorite", 0);
-            newUserData.put("review", reviewJson);
-
-            userdataArray.put(newUserData);
-
-            // JSON 데이터를 파일에 저장
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(existingData.toString().getBytes());
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (requestCode == 0 && resultCode == getActivity().RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageViewSelectedImage.setImageBitmap(imageBitmap);
         }
     }
 }

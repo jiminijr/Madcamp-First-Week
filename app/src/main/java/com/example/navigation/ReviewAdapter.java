@@ -11,17 +11,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     private Context context;
+    private UserJsonManager userJsonManager;
+    private RestaurantItem item;
     private List<Review> reviewList;
 
-    public ReviewAdapter(List<Review> reviewList) {
+    public ReviewAdapter(UserJsonManager userJsonManager, RestaurantItem item) {
         this.context = context;
         this.reviewList = reviewList;
+        this.userJsonManager = userJsonManager;
+        this.item = item;
+        this.update();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -49,19 +52,13 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         Review review = reviewList.get(position);
         holder.reviewTextView.setText(review.getReviewText());
         holder.reviewRatingBar.setRating(review.getRating());
-
-        if (review.getImageUrl() != null && !review.getImageUrl().isEmpty()) {
-            if (holder.reviewImageView.isAttachedToWindow()) { // 뷰가 화면에 첨부되었는지 확인
-                Glide.with(context)
-                        .load(Uri.parse(review.getImageUrl()))
-                        .error(R.drawable.ic_search_black_24dp)
-                        .into(holder.reviewImageView);
-            }
-        } else {
-            holder.reviewImageView.setImageResource(R.drawable.ic_cross_black_24dp);
-        }
     }
 
+
+    public void update(){
+        reviewList = userJsonManager.getReviewList(item);
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {

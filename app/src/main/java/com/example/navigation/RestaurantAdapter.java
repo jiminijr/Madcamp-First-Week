@@ -1,7 +1,9 @@
 package com.example.navigation;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     private Fragment currentFragment;
     private ArrayList<RestaurantItem> fav_filtered_restaurantList;
     private ArrayList<RestaurantItem> filtered_restaurantList;
-
+    private ReviewAdapter recyclerViewadapter;
     private int state;
 
     private UserJsonManager userJsonManager;
@@ -148,27 +151,45 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
                 navController.navigate(R.id.navigation_notifications, bundle);
             });
         }
+
         ImageView reviewIcon = detailsView.findViewById(R.id.review);
         if (reviewIcon != null) {
             reviewIcon.setOnClickListener(v -> {
                 Dialog reviewsDialog = new Dialog(context);
                 reviewsDialog.setContentView(R.layout.popup_reviews_layout);
 
-                // 여기에서 ID를 'reviewRecyclerView'로 변경
+                // 리뷰 보는데 닫는 버튼
+                ImageButton close_button = (ImageButton) reviewsDialog.findViewById(R.id.close_button);
+                close_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        reviewsDialog.dismiss();
+                    }
+                });
+
+                // 리뷰 목록 설정
                 RecyclerView recyclerView = reviewsDialog.findViewById(R.id.reviewRecyclerView);
                 if (recyclerView != null) {
-                    List<Review> reviewList = createDummyReviews();
-                    ReviewAdapter adapter = new ReviewAdapter(reviewList);
-                    recyclerView.setAdapter(adapter);
+                    recyclerViewadapter = new ReviewAdapter(userJsonManager, item);
+                    recyclerView.setAdapter(recyclerViewadapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(context));
                     reviewsDialog.show();
                 } else {
                     Log.e("RestaurantAdapter", "RecyclerView is null");
                 }
+
+                // 리뷰 작성 탭
+                ImageButton review_write_button = (ImageButton) reviewsDialog.findViewById(R.id.review_button);
+                review_write_button.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                        ReviewDialogFragment reviewDialogFragment = new ReviewDialogFragment(item, userJsonManager, recyclerViewadapter);
+                        reviewDialogFragment.show(currentFragment.getParentFragmentManager(), "reviewInputDialog");
+                    }
+                });
             });
         }
     }
-
     private void updateMenuLayout(View detailsView, Menu menu, int frameId, int imageId, int textId, int textPriceId) {
         FrameLayout frameLayout = detailsView.findViewById(frameId);
         ImageView imageView = frameLayout.findViewById(imageId);

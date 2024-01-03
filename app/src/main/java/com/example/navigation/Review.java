@@ -7,7 +7,7 @@ public class Review {
     private float rating;
 
     // 생성자
-    public Review(String reviewText, String imageUrl, int rating) {
+    public Review(String reviewText, String imageUrl, float rating) {
         this.reviewText = reviewText;
         this.imageUrl = imageUrl;
         this.rating = rating;
@@ -26,15 +26,4 @@ public class Review {
         return imageUrl;
     }
 
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }
