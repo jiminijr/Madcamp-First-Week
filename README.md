@@ -94,12 +94,14 @@ Firebase Version :
 
 > Tab 1의 개별 식당 상세 화면
 
+<img src="[https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d15636d-edf6-433e-8d31-cc66bd1ea63d](https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/44af5dab-7efa-4440-a685-c7c6575cd363)" width="200" height="400"/>
 
 
 - ConstraintLayout, CardView, RecyclerView 등 사용
 - 개별 식당 카드를 누르면, 판매하는 3가지 메뉴 정보와 가격이 나타남
 
-  
+
+ 
 - 통화 아이콘을 누르면 해당되는 식당의 번호로 전화를 걸 수 있음
 
   
@@ -111,6 +113,11 @@ Firebase Version :
 
 ### Tab 2 - Tags
 ---
+> Tag를 통한 메뉴 추천 및 식당 추천 탭
+
+
+- 사용자가 원하는 태그를 누르면 해당 태그에 적힌 음식을 파는 음식점을 소개
+- Tab 1과 연동되어, 개별 식당 정보를 누르면 tab 1의 세부 식당 정보 안내와 동일한 기능 수행
 
 ### Tab 3 - Map
 ---
