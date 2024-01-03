@@ -140,8 +140,8 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:src="@drawable/ic_phone_call"
-        app:layout_constraintEnd_toEndOf="@+id/frame2"
-        app:layout_constraintStart_toStartOf="@id/frame1"
+        app:layout_constraintEnd_toEndOf="@+id/frame1"
+        app:layout_constraintStart_toStartOf="@+id/frame1"
         app:layout_constraintTop_toBottomOf="@id/frame1"
         app:layout_constraintWidth_percent="0.01" />
 
@@ -154,9 +154,22 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:src="@drawable/ic_map_black_24dp"
-        app:layout_constraintEnd_toEndOf="@+id/frame3"
-        app:layout_constraintStart_toStartOf="@id/frame2"
+        app:layout_constraintEnd_toStartOf="@+id/frame3"
+        app:layout_constraintStart_toEndOf="@+id/frame1"
         app:layout_constraintTop_toBottomOf="@id/frame2"
+        app:layout_constraintWidth_percent="0.01" />
+
+    <ImageView
+        android:id="@+id/review"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_review"
+        app:layout_constraintEnd_toEndOf="@+id/frame3"
+        app:layout_constraintStart_toEndOf="@+id/frame3"
+        app:layout_constraintStart_toStartOf="@+id/frame3"
+        app:layout_constraintTop_toBottomOf="@+id/frame3"
         app:layout_constraintWidth_percent="0.01" />
 
     <View
