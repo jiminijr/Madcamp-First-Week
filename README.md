@@ -75,7 +75,8 @@ targetSdk = 33
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/b9541ae4-0f1e-4cff-a7e1-0161c8fca370" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/3d39ec9e-f624-4bca-a2a6-91b15d2ad232" width="200" height="400"/>
-<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/a386c64b-bae1-4023-bb45-bf65ab1e1a83" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/e02ae75f-ea66-4405-aeb4-f61a4a5ec582" width="200" height="400"/>
+
 
 
 - 로고 제작 후 svg 포맷으로 저장
@@ -84,7 +85,7 @@ targetSdk = 33
 
 ### Tab 1 - Restaurants
 ---
-> Tab 1의 기본 화면
+> Tab 1의 기본 화면 (검색, 찜 아이콘)
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d15636d-edf6-433e-8d31-cc66bd1ea63d" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/1ace2e39-81df-4e20-9642-08a53e5840a4" width="200" height="400"/>
@@ -99,6 +100,8 @@ targetSdk = 33
 - 개별 하트 아이콘을 누르면 '찜'으로 설정되어 우측 하단 하트 버튼을 누르면 찜한 맛집 목록으로 필터링 가능함
 - 필터링 된 경우에 검색 아이콘을 누를 시 찜한 맛집 내에서 검색 기능이 작동함
 
+
+
 > Tab 1의 개별 식당 상세 화면
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/44af5dab-7efa-4440-a685-c7c6575cd363" width="200" height="400"/>
@@ -108,15 +111,17 @@ targetSdk = 33
 - ConstraintLayout, CardView, RecyclerView 등 사용
 - 개별 맛집 카드를 누르면, 판매하는 3가지 메뉴 정보와 가격이 나타남
 
+
+> 통화 아이콘
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/68ef5c03-9c54-4fd2-9559-11f1a28c1192" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/9e3769dc-0380-479f-be91-e9e384dfaf58" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/2ac3317b-d980-4940-9404-374d2134f38b" width="200" height="400"/>
 
-
-
 - 통화 아이콘을 누르면 해당되는 맛집의 번호로 전화를 걸 수 있음
 
-- 
+
+
+> 지도 아이콘
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/d2a9d1f9-c6ca-40e1-abb7-173b07e553c2" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/4fbd6748-8d97-4531-80e0-e3cc06530c62" width="200" height="400"/>
