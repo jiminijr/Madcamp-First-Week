@@ -74,6 +74,8 @@ Firebase Version :
 > 앱 실행 시 나타나는 로딩 화면
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/b9541ae4-0f1e-4cff-a7e1-0161c8fca370" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/3d39ec9e-f624-4bca-a2a6-91b15d2ad232" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/a386c64b-bae1-4023-bb45-bf65ab1e1a83" width="200" height="400"/>
 
 
 - 로고 제작 후 svg 포맷으로 저장
@@ -85,6 +87,11 @@ Firebase Version :
 > Tab 1의 기본 화면
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d15636d-edf6-433e-8d31-cc66bd1ea63d" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/1ace2e39-81df-4e20-9642-08a53e5840a4" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/8a95cb81-b5ad-4047-a177-acba675e92ca" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/924081db-2a25-4640-9675-e49d2026cdc9" width="200" height="400"/>
+
+
 
 
 - ConstraintLayout, CardView, RecyclerView 등을 사용하여 구현
@@ -95,11 +102,19 @@ Firebase Version :
 > Tab 1의 개별 식당 상세 화면
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/44af5dab-7efa-4440-a685-c7c6575cd363" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6d87b141-2f39-4009-8a04-cb03aa1051e2" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/cd1b8b23-4c7c-4965-a898-57ecf5fca5df" width="200" height="400"/>
+
+
+
 
 - ConstraintLayout, CardView, RecyclerView 등 사용
 - 개별 맛집 카드를 누르면, 판매하는 3가지 메뉴 정보와 가격이 나타남
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/68ef5c03-9c54-4fd2-9559-11f1a28c1192" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/9e3769dc-0380-479f-be91-e9e384dfaf58" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/2ac3317b-d980-4940-9404-374d2134f38b" width="200" height="400"/>
+
 
 
 - 통화 아이콘을 누르면 해당되는 맛집의 번호로 전화를 걸 수 있음
@@ -123,10 +138,8 @@ Firebase Version :
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/7d4522b0-a916-4406-800e-4aa89a90df63" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/2f6f7c68-de5d-4e3a-8811-6159057ac462" width="200" height="400"/>
-<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/fe7c4321-558d-4d48-ade2-4c2272710b4a" width="200" height="400"/>
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/03894742-fffe-4a8b-924e-654a0b43d1e3" width="200" height="400"/>
-
-
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/38fa00a2-60f9-455c-8708-4ae284a66449" width="200" height="400"/>
 
 
 
