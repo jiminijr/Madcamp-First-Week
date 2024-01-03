@@ -30,13 +30,26 @@
 
 ## 2. 개발 환경
 
-Android Studio 2022.3.1 
+- IDE : Android Studio 2022.3.1 
 
-compileSDKversion : 34
 
-minSdk = 26
+- OS : Android
 
-targetSdk = 33
+
+- Language : Java, Kotlin
+
+
+- Target Device : Galaxy s8
+
+
+- compileSDKversion : 34
+
+
+- minSdk = 26
+
+
+- targetSdk = 33
+
 
 ## 3. 구현 기능 
 ### 내부 데이터 관리
@@ -82,6 +95,7 @@ targetSdk = 33
 - 로고 제작 후 svg 포맷으로 저장
 - build.gradle.kts (Module :app) 에 ```implementation ("com.airbnb.android:lottie:6.3.0")``` 추가 후 lottie 사용
 - SplashActivity에서 5초 간 로딩화면 지속하도록 구현
+
 
 ### Tab 1 - Restaurants
 ---
@@ -137,6 +151,7 @@ targetSdk = 33
 - 리뷰 아이콘을 누르면 다른 사람의 리뷰가 나타나며 상단에는 '리뷰 등록' 아이콘과 '팝업 닫기' 아이콘이 존재함
 - '리뷰 등록' 아이콘을 누르면 리뷰를 등록할 수 있는 창이 나타나고, 해당 창에는 별점 기능, 리뷰 작성칸, 카메라 및 갤러리를 통한 사진 첨부 기능이 있음
 
+
 ### Tab 2 - Tags
 ---
 > 갤러리 뷰를 사용하여 태그를 통한 음식 추천 및 해당하는 음식점 안내
@@ -151,6 +166,7 @@ targetSdk = 33
 - 앨범 형식으로 메뉴 추천 구현
 - 각각의 앨범 항목을 클릭하면 해당 음식을 판매하는 맛집 안내
 - tab 1과 연동하여 음식점 정보를 누를 시 tab 1과 동일하게 맛집 상세 정보 페이지 표출
+
 
 ### Tab 3 - Map
 ---
