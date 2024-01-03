@@ -119,6 +119,8 @@ Firebase Version :
 
 <img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/7d4522b0-a916-4406-800e-4aa89a90df63" width="200" height="400"/>
 
+
+
 - 앨범 형식으로 메뉴 추천 구현
 - 각각의 앨범 항목을 클릭하면 해당 음식을 판매하는 맛집 안내
 - tab 1과 연동하여 음식점 정보를 누를 시 tab 1과 동일하게 맛집 상세 정보 페이지 표출
@@ -126,5 +128,16 @@ Firebase Version :
 ### Tab 3 - Map
 ---
 > Naver Map API를 사용하여 현재 위치, 맛집 위치, 맛집 정보가 나타나도록 구현
+
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/d99abd69-7223-4903-9213-2ef6db63b57a" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/17e0e1f7-30ae-44ff-8e95-1a3270599e50" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/5b1dc1f4-5712-45e5-849d-e037917bb4cf" width="200" height="400"/>
+<img src="https://github.com/jiminijr/Madcamp-First-Week/assets/95954633/6eee645a-25bf-4822-9f83-d0dea9acb05c" width="200" height="400"/>
+
+
+
+- 확대, 축소가 가능함
+- 현재 위치 아이콘을 누르면 현재 위치가 표시됨
+- 지도 위 마커를 누르면 맛집 정보가 나타남
 
 
