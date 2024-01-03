@@ -1,5 +1,6 @@
 package com.example.navigation;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,21 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.ViewHolder> implements Filterable {
 
@@ -34,7 +36,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
-
+    private List<Review> createDummyReviews() {
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(new Review("맛있어요!", "asd5", 2));
+        reviews.add(new Review("좋았습니다.", "asdasd4", 4));
+        // 여기에 더 많은 리뷰를 추가할 수 있습니다.
+        return reviews;
+    }
     private OnItemClickListener listener;
 
     public RestaurantAdapter(Context context, ArrayList<RestaurantItem> restaurantList, Fragment currentFragment) {
@@ -111,8 +119,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         }
 
         ImageView maplinkIcon = detailsView.findViewById(R.id.icon_map);
-        if(maplinkIcon != null) {
-            maplinkIcon.setOnClickListener(v ->{
+        if (maplinkIcon != null) {
+            maplinkIcon.setOnClickListener(v -> {
                 // map에 연결 -> Navcontroller 가져와서 map 이동 -> Camera를 대응하는 것으로 설정 -> info window activate
                 // item 전달
                 Bundle bundle = new Bundle();
@@ -124,8 +132,26 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
             });
         }
-    }
+        ImageView reviewIcon = detailsView.findViewById(R.id.review);
+        if (reviewIcon != null) {
+            reviewIcon.setOnClickListener(v -> {
+                Dialog reviewsDialog = new Dialog(context);
+                reviewsDialog.setContentView(R.layout.popup_reviews_layout);
 
+                // 여기에서 ID를 'reviewRecyclerView'로 변경
+                RecyclerView recyclerView = reviewsDialog.findViewById(R.id.reviewRecyclerView);
+                if (recyclerView != null) {
+                    List<Review> reviewList = createDummyReviews();
+                    ReviewAdapter adapter = new ReviewAdapter(reviewList);
+                    recyclerView.setAdapter(adapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    reviewsDialog.show();
+                } else {
+                    Log.e("RestaurantAdapter", "RecyclerView is null");
+                }
+            });
+        }
+    }
 
     private void updateMenuLayout(View detailsView, Menu menu, int frameId, int imageId, int textId, int textPriceId) {
         FrameLayout frameLayout = detailsView.findViewById(frameId);
@@ -187,6 +213,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
         TextView infoTextView;
         ViewGroup detailsView; // 상세 정보 뷰 멤버 변수 선언
         ImageView phoneCallIcon; // 전화 아이콘 추가
+        Button reviewButton;
 
         public ViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -196,6 +223,8 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
             addressTextView = itemView.findViewById(R.id.restaurant_address_view);
             infoTextView = itemView.findViewById(R.id.restaurant_info_view);
             detailsView = itemView.findViewById(R.id.details_container); // 상세 정보 뷰 초기화
+            reviewButton = itemView.findViewById(R.id.review); // 리뷰 버튼 초기화
+
         }
     }
 }

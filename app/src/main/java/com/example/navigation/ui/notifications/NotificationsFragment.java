@@ -210,9 +210,7 @@ public class NotificationsFragment extends Fragment implements OnMapReadyCallbac
                     CameraPosition cameraPosition = new CameraPosition(new LatLng(cur), currentcameraPosition.zoom);
                     naverMap.setCameraPosition(cameraPosition);
                 }
-                for(InfoWindow infoWindow : infoWindows){
-                    infoWindow.close();
-                }
+
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Face);
             }
         });
