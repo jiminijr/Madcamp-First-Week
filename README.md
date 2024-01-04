@@ -36,7 +36,7 @@
 - OS : Android
 
 
-- Language : Java, Kotlin
+- Language : Java
 
 
 - Target Device : Galaxy s8
@@ -181,11 +181,6 @@
 - 확대, 축소가 가능함
 - 현재 위치 아이콘을 누르면 현재 위치가 표시됨
 - 지도 위 마커를 누르면 맛집 정보가 나타남
-
-
-## 사용 언어
-
-java, kotlin
 
 
 
